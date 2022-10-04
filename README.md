@@ -1,8 +1,8 @@
 # HTML Compare Switch - the diff that understands HTML
 
-[![Build Status](https://travis-ci.org/krajzeg/hiff.svg?branch=next)](https://travis-ci.org/krajzeg/hiff) [![Coverage Status](https://coveralls.io/repos/krajzeg/hiff/badge.svg?branch=next&service=github)](https://coveralls.io/github/krajzeg/hiff?branch=next) [![Dependency Status](https://david-dm.org/krajzeg/hiff.svg)](https://david-dm.org/krajzeg/hiff)
 
-Hiff is a small module that can take two pieces of HTML, compare them against each other, and return a complete list of differences between the two - ignoring things like attribute order or insignificant whitespace that don't influence semantics. Basically, if it would render the same in a browser, it'll compare as equal.
+
+html-compare-switch is a small module that can take two pieces of HTML, compare them against each other, and return a complete list of differences between the two - ignoring things like attribute order or insignificant whitespace that don't influence semantics. Basically, if it would render the same in a browser, it'll compare as equal.
 
 Uses [cheerio][cheerio] under the hood for HTML parsing.
 
@@ -11,7 +11,7 @@ Uses [cheerio][cheerio] under the hood for HTML parsing.
 ```javascript
 const htmlCompare = require('html-compare-switch');
 
-var result = hiff.compare('<div>Some HTML</div>', '<div>Possibly changed HTML</div>');
+var result = htmlCompare.compare('<div>Some HTML</div>', '<div>Possibly changed HTML</div>');
 if (result.different) {
   console.log("HTML fragments are different, changes:");
   result.changes.map(function(change) {
@@ -74,7 +74,7 @@ The **before** and **after** objects share the same format and let you pinpoint 
 
 ## Advanced configuration
 
-Hiff uses heuristics to guess whether a node is unchanged, edited, or completely replaced with a new one. This can be the difference between one "changed" in your diff (if the nodes in the old and new DOM are still deemed to be similar enough) and an "added"/"removed" pair (if hiff guesses they're not the same node).
+Html-compare-switch uses heuristics to guess whether a node is unchanged, edited, or completely replaced with a new one. This can be the difference between one "changed" in your diff (if the nodes in the old and new DOM are still deemed to be similar enough) and an "added"/"removed" pair (if html-compare-switch guesses they're not the same node).
 
 The defaults should do OK in most situations, but you can influence the weights the heuristic uses with a `tagComparison` option:
 
@@ -84,13 +84,13 @@ htmlCompare.compare(html1, html2, {
 });
 ```
 
-This lets you influence the weights (relative to defaults) that Hiff will give to each of the four components when comparing tags: the **name** of the tag, the **id** attribute (which is treated separately from other attributes as important for identifying nodes), other **attributes**, and the **contents** of the tag (children and text). The default settings is `1` for each property. Setting it to a higher number will make this component more important, and to a lower number - less important. Setting it to 0 will make Hiff **completely ignore** the given component.
+This lets you influence the weights (relative to defaults) that html-compare-switch will give to each of the four components when comparing tags: the **name** of the tag, the **id** attribute (which is treated separately from other attributes as important for identifying nodes), other **attributes**, and the **contents** of the tag (children and text). The default settings is `1` for each property. Setting it to a higher number will make this component more important, and to a lower number - less important. Setting it to 0 will make html-compare-switch **completely ignore** the given component.
 
 As a convenience you can also set a property to `false` with the same meaning as 0. If you don't provide all of them, only the
 ones you specify will be changed, for example:
 
 ```javascript
-// this will make Hiff treat <div>Blah</div> and <section>Blah</section> as identical
+// this will make html-compare-switch treat <div>Blah</div> and <section>Blah</section> as identical
 htmlCompare.compare(html1, html2, {name: false}); 
 ```
 
