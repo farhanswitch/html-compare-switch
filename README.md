@@ -1,4 +1,4 @@
-# Hiff - the diff that understands HTML
+# HTML Compare Switch - the diff that understands HTML
 
 [![Build Status](https://travis-ci.org/krajzeg/hiff.svg?branch=next)](https://travis-ci.org/krajzeg/hiff) [![Coverage Status](https://coveralls.io/repos/krajzeg/hiff/badge.svg?branch=next&service=github)](https://coveralls.io/github/krajzeg/hiff?branch=next) [![Dependency Status](https://david-dm.org/krajzeg/hiff.svg)](https://david-dm.org/krajzeg/hiff)
 
