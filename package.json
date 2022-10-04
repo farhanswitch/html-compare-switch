@@ -1,6 +1,6 @@
 {
   "name": "html-compare-switch",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Diffing module that understands HTML and gives semantic information about what was changed. Compare character per character.",
   "main": "lib/index.js",
   "scripts": {
