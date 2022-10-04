@@ -9,7 +9,7 @@ Uses [cheerio][cheerio] under the hood for HTML parsing.
 ## Quick start
 
 ```javascript
-var hiff = require('hiff');
+const htmlCompare = require('html-compare-switch');
 
 var result = hiff.compare('<div>Some HTML</div>', '<div>Possibly changed HTML</div>');
 if (result.different) {
@@ -79,7 +79,7 @@ Hiff uses heuristics to guess whether a node is unchanged, edited, or completely
 The defaults should do OK in most situations, but you can influence the weights the heuristic uses with a `tagComparison` option:
 
 ```javascript
-hiff.compare(html1, html2, {
+htmlCompare.compare(html1, html2, {
     tagComparison: {name: 1, id: 1, attributes: 0, contents: 0}
 });
 ```
@@ -91,7 +91,7 @@ ones you specify will be changed, for example:
 
 ```javascript
 // this will make Hiff treat <div>Blah</div> and <section>Blah</section> as identical
-hiff.compare(html1, html2, {name: false}); 
+htmlCompare.compare(html1, html2, {name: false}); 
 ```
 
 ### Custom comparators
@@ -99,17 +99,17 @@ hiff.compare(html1, html2, {name: false});
 _Here be dragons - don't do this unless there is no other way._ If there is no other way around your specific needs and the default heuristic fails you, you can provide your custom comparator function like this:
 
 ```javascript
-hiff.compare(html1, html2, {tagComparison: comparatorFn});
+htmlCompare.compare(html1, html2, {tagComparison: comparatorFn});
 function comparatorFn($n1, $n2, childChanges) {
   if ($n1.is("[magic]") && $n2.is("[magic]"))
-    return ($n1.attr('magic') == $n2.attr('magic')) ? hiff.IDENTICAL : hiff.NOT_THE_SAME_NODE;
+    return ($n1.attr('magic') == $n2.attr('magic')) ? htmlCompare.IDENTICAL : htmlCompare.NOT_THE_SAME_NODE;
   else
-    return hiff.defaultTagComparisonFn($n1, $n2, childChanges);
+    return htmlCompare.defaultTagComparisonFn($n1, $n2, childChanges);
 }
 ```
 
-Your function will get two [cheerio][cheerio] nodes to be compared, and a list of changes for the tag's children (as an array of Hiff change objects). You can use those to decide whether the node should be treated as identical (return `hiff.IDENTICAL`), the same node with edits (return `hiff.SAME_BUT_DIFFERENT`), or completely different (return `hiff.NOT_THE_SAME_NODE`).
+Your function will get two [cheerio][cheerio] nodes to be compared, and a list of changes for the tag's children (as an array of htmlCompare change objects). You can use those to decide whether the node should be treated as identical (return `htmlCompare.IDENTICAL`), the same node with edits (return `htmlCompare.SAME_BUT_DIFFERENT`), or completely different (return `htmlCompare.NOT_THE_SAME_NODE`).
 
-You can use `hiff.defaultTagComparisonFn` to only override a part of the normal logic and use the standard comparison for everything else, like in the example above.
+You can use `htmlCompare.defaultTagComparisonFn` to only override a part of the normal logic and use the standard comparison for everything else, like in the example above.
 
 [cheerio]: https://github.com/cheeriojs/cheerio
