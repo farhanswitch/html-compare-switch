@@ -1,7 +1,7 @@
 {
-  "name": "hiff",
-  "version": "0.3.1",
-  "description": "Diffing module that understands HTML and gives semantic information about what was changed.",
+  "name": "html-compare-switch",
+  "version": "0.0.1",
+  "description": "Diffing module that understands HTML and gives semantic information about what was changed. Compare character per character.",
   "main": "lib/index.js",
   "scripts": {
     "test": "nyc mocha --recursive",
@@ -14,8 +14,8 @@
     "semantic",
     "cheerio"
   ],
-  "repository": "krajzeg/hiff",
-  "author": "Jakub Wasilewski <wasyl@wasyl.eu>",
+  "repository": "farhanswitch/html-compare-switch",
+  "author": "Muhammad Farhan <farhan.muhammad11@programmer.net>",
   "license": "Zlib",
   "devDependencies": {
     "chai": "^4.2.0",
